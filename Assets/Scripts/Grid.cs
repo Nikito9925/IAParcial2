@@ -20,11 +20,10 @@ public class Grid : MonoBehaviour
         {
             for (int y = 0; y < _height; y++)
             {
-                GameObject prefab = Instantiate(_prefab,
-                    transform.position + new Vector3(x, 0, y) * _distance, Quaternion.identity, transform);
+                GameObject prefab = Instantiate(_prefab, transform.position + new Vector3(x, 0, y) * _distance, Quaternion.identity, transform);
                 _grid[x, y] = prefab;
                 prefab.GetComponent<Pf_Node>().Initialize(x, y, this);
-                prefab.GetComponent<Pf_Node>().GetNeighbors();
+                //prefab.GetComponent<Pf_Node>().GetNeighbors();
             }
         }
     }

@@ -16,7 +16,7 @@ public class PathFinding : MonoBehaviour
 
         while (frontier.Count > 0) //Encuentra nodos que no checkeo.
         {
-            Pf_Node current = frontier.Dequeue(); 
+            Pf_Node current = frontier.Dequeue(); //Lo saca y lo utiliza.
 
             if (current == endNode)
             {

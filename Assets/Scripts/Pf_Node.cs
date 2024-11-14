@@ -13,16 +13,16 @@ public class Pf_Node : MonoBehaviour
     public List<Pf_Node> GetNeighbors()
     {
         if (_neighbors.Count != 0) return _neighbors;
-        Pf_Node neighbor = _grid.GetNode(_x, _y - 1);  //Up.
+        Pf_Node neighbor = _grid.GetNode(_x, _y - 1);  //Arriba.
 
         if (neighbor) _neighbors.Add(neighbor);
-        neighbor = _grid.GetNode(_x + 1, _y);          //Right.
+        neighbor = _grid.GetNode(_x + 1, _y);          //Derecha.
 
         if (neighbor) _neighbors.Add(neighbor);
-        neighbor = _grid.GetNode(_x, _y + 1);          //Down.
+        neighbor = _grid.GetNode(_x, _y + 1);          //Abajo.
 
         if (neighbor) _neighbors.Add(neighbor);
-        neighbor = _grid.GetNode(_x - 1, _y);          //Left.
+        neighbor = _grid.GetNode(_x - 1, _y);          //Izquierda.
         
         if (neighbor) _neighbors.Add(neighbor);
 
