@@ -11,7 +11,9 @@ public class AgentStatePatrol : AgentState
 
     public override void Execute()
     {
+        //FOV
 
+        //detecta al player
     }
 
     public override void Sleep()
