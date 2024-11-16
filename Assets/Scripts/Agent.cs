@@ -5,11 +5,16 @@ using UnityEngine;
 public class Agent : MonoBehaviour
 {
     [SerializeField] private Model _model;
-    [SerializeField] private Controller _controller;
+    public Controller _controller;
 
     private void Awake()
     {
-        _model = new AgentModel();
+        _model = new AgentModel(transform);
         _controller = new AgentController(_model);
+    }
+
+    private void Update()
+    {
+        _controller.Update();
     }
 }

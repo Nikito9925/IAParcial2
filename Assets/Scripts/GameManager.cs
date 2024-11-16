@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private PathFinding _pf = default;
 
     public Pf_Grid grid = default;
-    public Pf_Agent agent = default;
+    public Agent agent = default;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         {
             grid.ResetNodesColors();
             List<Pf_Node> path = _pf.ConstructDijkstra(startingNode, goalNode);
-            agent.SetPath(path);
+            agent._controller._model.SetPath(path);
             PaintPath(path);
         }
     }
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         startingNode = n;
         PaintGameObject(startingNode.gameObject, Color.yellow);
 
-        agent.SetPos(startingNode.transform.position);
+        agent._controller._model.SetPos(startingNode.transform.position);
     }
 
     public void SetGoalNode(Pf_Node n)
