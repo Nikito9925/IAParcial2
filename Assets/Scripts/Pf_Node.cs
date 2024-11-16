@@ -6,7 +6,7 @@ public class Pf_Node : MonoBehaviour
 {
     [SerializeField] private List<Pf_Node> _neighbors = new();
     [SerializeField] private Pf_Grid _grid = default;
-    private int _x = 0, _y = 0;
+    public int _x = 0, _y = 0;
     public float cost = 0;
 
     public bool isBlocked = false;
