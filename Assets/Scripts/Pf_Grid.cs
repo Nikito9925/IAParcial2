@@ -39,15 +39,26 @@ public class Pf_Grid : MonoBehaviour
     {
         if (x < 0 || x > _width - 1 || y < 0 || y > _height - 1) return null;
 
-        return nodes[x * _width + y].GetComponent<Pf_Node>();
+        Pf_Node node = nodes[x * _width + y].GetComponent<Pf_Node>();
+        if (node != null) return node;
+        else return null;
     }
 
     public void ResetNodesColors()
     {
         for (int i = 0; i < nodes.Length; i++)
         {
-            if (nodes[i].GetComponent<Pf_Node>().isBlocked) continue;
-            GameManager.instance.PaintGameObject(nodes[i], Color.red);
+            if (nodes[i] != null)
+            {
+                Pf_Node node = nodes[i].GetComponent<Pf_Node>();
+
+                if (node != null)
+                {
+                    if (node.isBlocked) continue;
+                    GameManager.instance.PaintGameObject(nodes[i], Color.red);
+                }
+            }
+
         }
     }
 }
