@@ -129,7 +129,7 @@ public class PathFinding
                 if (!cameFrom.ContainsKey(next))//|| newCost < costSoFar[next])
                 {
                     costSoFar[next] = newCost;
-                    float priority = newCost;// + Heuristic(endNode, next);// + Distance(endNode, next)/100;
+                    float priority = newCost + Heuristic(endNode, next);// + Distance(endNode, next)/100;
                     frontier.Put(next, priority);
                     cameFrom[next] = current;
                     //GameManager.instance.PaintGameObject(next, Color.yellow);
@@ -137,5 +137,10 @@ public class PathFinding
             }
         }
         return null;
+    }
+
+    private float Heuristic(Pf_Node objective, Pf_Node next)
+    {
+        return Mathf.Abs(objective._x - next._x) + Mathf.Abs(objective._y - next._y);
     }
 }
