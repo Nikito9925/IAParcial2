@@ -17,9 +17,6 @@ public class AgentStateChase : AgentState
 
     public override void Execute()
     {
-        //FOV
-
-        //detecta al player
 
         Debug.Log("ABC");
 

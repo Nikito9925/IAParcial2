@@ -74,7 +74,7 @@ public class AgentModel : Model
 
     public override bool FOV()
     {
-        cols = new Collider[10];
+        cols = new Collider[1];
         Physics.OverlapSphereNonAlloc(_transform.position, _radius, cols, LayerMask.GetMask(_playerMask));
         bool seePlayer = false;
         for (int i = 0; i < cols.Length; i++)

@@ -17,12 +17,7 @@ public class AgentStatePatrol : AgentState
 
     public override void Execute()
     {
-        //FOV
-
-        //detecta al player
-
         _model.Move();
-
 
         if (_model.FOV())
         {

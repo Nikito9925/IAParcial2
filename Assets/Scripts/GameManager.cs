@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public void StartPatrol(Agent agent, Pf_Node startNode, Pf_Node goalNode)
     {
         grid.ResetNodesColors();
-        List<Pf_Node> path = _pf.ConstructDijkstra(startNode, goalNode);
+        List<Pf_Node> path = _pf.ConstructAStar(startNode, goalNode);
         agent._controller._model.SetPath(path);
         //PaintPath(path);
     }

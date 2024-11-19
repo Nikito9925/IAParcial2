@@ -89,4 +89,53 @@ public class PathFinding
         }
         return null;
     }
+
+    public List<Pf_Node> ConstructAStar(Pf_Node startNode, Pf_Node endNode)
+    {
+        if (startNode == null || endNode == null) return null;
+
+        PriorityQueue<Pf_Node> frontier = new();
+        frontier.Put(startNode, 0);
+
+        Dictionary<Pf_Node, Pf_Node> cameFrom = new(); //Por cada nodo, nos da el nodo de origen
+        cameFrom.Add(startNode, null);
+
+        Dictionary<Pf_Node, float> costSoFar = new();
+        costSoFar.Add(startNode, startNode.cost);
+
+        while (frontier.Count > 0) // haya nodos cuyos vecinos no checkee
+        {
+            Pf_Node current = frontier.Get(); // Ambos Get y Remove, me da el de menos costo
+
+            if (current == endNode)
+            {
+                List<Pf_Node> path = new();
+                Pf_Node nodeToAdd = current;
+
+                while (nodeToAdd != null)
+                {
+                    path.Add(nodeToAdd);
+                    nodeToAdd = cameFrom[nodeToAdd]; //Obtengo el nodo anterior del actual
+                }
+                path.Reverse();
+                Debug.Log("Se chequearon " + cameFrom.Count);
+                return path;
+            }
+
+            foreach (Pf_Node next in current.GetNeighbors())
+            {
+                if (next.isBlocked) continue;
+                float newCost = costSoFar[current] + next.cost;
+                if (!cameFrom.ContainsKey(next))//|| newCost < costSoFar[next])
+                {
+                    costSoFar[next] = newCost;
+                    float priority = newCost;// + Heuristic(endNode, next);// + Distance(endNode, next)/100;
+                    frontier.Put(next, priority);
+                    cameFrom[next] = current;
+                    //GameManager.instance.PaintGameObject(next, Color.yellow);
+                }
+            }
+        }
+        return null;
+    }
 }
