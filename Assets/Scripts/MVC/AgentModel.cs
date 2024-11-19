@@ -4,10 +4,12 @@ using UnityEngine;
 public class AgentModel : Model
 {
     private Transform _transform;
+    private Agent _entity;
 
-    public AgentModel(Transform newTransform)
+    public AgentModel(Transform newTransform, Agent entity)
     {
         _transform = newTransform;
+        _entity = entity;
     }
     public override void Move()
     {
@@ -18,12 +20,19 @@ public class AgentModel : Model
         _transform.forward = dir;
 
         if (dir.magnitude < 0.25f)
+        {
             _path.RemoveAt(0);
+            if(_path.Count <= 0)
+            {
+                _entity.firstPath = !_entity.firstPath;
+                _entity.StartPatrol();
+            }
+        }
 
         _transform.position += dir.normalized * _speed * Time.deltaTime;
     }
 
-    [SerializeField] private float _speed = 10;
+    [SerializeField] private float _speed = 2;
     private List<Pf_Node> _path = new();
 
     public override void SetPos(Vector3 pos)
