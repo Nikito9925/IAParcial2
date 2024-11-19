@@ -7,4 +7,6 @@ public abstract class Model
     public virtual void SetPath(List<Pf_Node> path) { }
 
     public virtual void SetPos(Vector3 pos) { }
+
+    public virtual bool FOV() { return false; }
 }

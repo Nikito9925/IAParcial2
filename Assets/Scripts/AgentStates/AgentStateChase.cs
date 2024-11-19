@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgentStatePatrol : AgentState
+public class AgentStateChase : AgentState
 {
     private Model _model;
-    public AgentStatePatrol(Model model, StateMachine<AgentState> fsm)
+    public AgentStateChase(Model model, StateMachine<AgentState> fsm)
     {
         _model = model;
         _fsm = fsm;
@@ -21,12 +21,11 @@ public class AgentStatePatrol : AgentState
 
         //detecta al player
 
-        _model.Move();
+        Debug.Log("ABC");
 
-
-        if (_model.FOV())
+        if(!_model.FOV())
         {
-            _fsm.SetState<AgentStateChase>();
+            _fsm.SetState<AgentStatePatrol>();
         }
     }
 
