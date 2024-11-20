@@ -15,7 +15,7 @@ public class AgentStateChase : AgentState
     {
         _entity._state = Agent.States.Chase;
 
-        GameManager.instance.StartChase(_model._entity, _model._entity.transform, GameManager.instance._player);
+        GameManager.instance.StartChase(_entity, _entity.transform, GameManager.instance._player);
         GameManager.instance.AlertAgents();
     }
 
@@ -28,7 +28,7 @@ public class AgentStateChase : AgentState
 
         if(!_model.HasNodes() && !_model.FOV())
         {
-            _fsm.SetState<AgentStatePatrol>();
+            _fsm.SetState<AgentStateChaseToPatrol>();
         }
 
         /*

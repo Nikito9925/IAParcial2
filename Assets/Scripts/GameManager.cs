@@ -42,7 +42,15 @@ public class GameManager : MonoBehaviour
         List<Pf_Node> path = _pf.ConstructAStar(newStart, newGoal);
         agent._controller._model.SetPath(path);
 
-        Debug.Log("START CHASE");
+        //Debug.Log("START CHASE");
+    }
+
+    public void BackToPatrol(Agent agent, Transform agentPos, Pf_Node goalNode)
+    {
+        Pf_Node startNode = _pf.GetClosestNode(agentPos, grid.nodes);
+
+        List<Pf_Node> path = _pf.ConstructAStar(startNode, goalNode);
+        agent._controller._model.SetPath(path);
     }
 
     /*

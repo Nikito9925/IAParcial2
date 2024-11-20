@@ -10,6 +10,7 @@ public class AgentController : Controller
         _fsm = new StateMachine<AgentState>();
         _fsm.AddState(new AgentStatePatrol(entity, _model, _fsm));
         _fsm.AddState(new AgentStateChase(entity, _model, _fsm));
+        _fsm.AddState(new AgentStateChaseToPatrol(entity, _model, _fsm));
     }
     public override void Update()
     {

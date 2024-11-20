@@ -36,7 +36,8 @@ public class Agent : MonoBehaviour
     public enum States
     {
         Patrol,
-        Chase
+        Chase,
+        ChaseToPatrol,
     }
 
     private void Awake()
