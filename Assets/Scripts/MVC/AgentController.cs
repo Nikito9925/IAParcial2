@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class AgentController : Controller
 {
-    private StateMachine<AgentState> _fsm;
-    public AgentController(Model model)
+    //public StateMachine<AgentState> _fsm;
+    public AgentController(Agent entity, Model model)
     {
         _model = model;
 
         _fsm = new StateMachine<AgentState>();
-        _fsm.AddState(new AgentStatePatrol(_model, _fsm));
-        _fsm.AddState(new AgentStateChase(_model, _fsm));
+        _fsm.AddState(new AgentStatePatrol(entity, _model, _fsm));
+        _fsm.AddState(new AgentStateChase(entity, _model, _fsm));
     }
     public override void Update()
     {

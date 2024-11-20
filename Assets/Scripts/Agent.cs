@@ -12,9 +12,16 @@ public class Agent : MonoBehaviour
     [SerializeField] private Pf_Node _startingNode1;
     [SerializeField] private Pf_Node _goalNode1;
 
+    public Pf_Node StartingNode1 { get { return _startingNode1; } }
+    public  Pf_Node GoalNode1 { get { return _goalNode1; }
+}
+
     [Header("SecondPath")]
     [SerializeField] private Pf_Node _startingNode2;
     [SerializeField] private Pf_Node _goalNode2;
+
+    public Pf_Node StartingNode2 { get { return _startingNode2; } }
+    public Pf_Node GoalNode2 { get { return _goalNode2; } }
 
     public bool firstPath;
 
@@ -22,16 +29,29 @@ public class Agent : MonoBehaviour
     [SerializeField] private float _radius;
     [SerializeField] private float _angle;
 
+
+    [Header("FSM")]
+    public States _state;
+
+    public enum States
+    {
+        Patrol,
+        Chase
+    }
+
     private void Awake()
     {
         firstPath = true;
         _model = new AgentModel(transform, this, _radius, _angle);
-        _controller = new AgentController(_model);
+        _controller = new AgentController(this, _model);
+
+        _state = States.Patrol;
     }
 
     private void Start()
     {
         if(firstPath) GameManager.instance.StartPatrol(this, _startingNode1, _goalNode1);
+        else GameManager.instance.StartPatrol(this, _startingNode2, _goalNode2);
     }
 
     private void Update()

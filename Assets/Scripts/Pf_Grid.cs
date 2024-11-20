@@ -6,7 +6,7 @@ using System;
 
 public class Pf_Grid : MonoBehaviour
 {
-    [SerializeField] private GameObject[] nodes;
+    public GameObject[] nodes;
     [SerializeField] private int _width = 0, _height = 0;
     //[SerializeField] private float _offset = 0;
     [SerializeField] private float _distance = 0;

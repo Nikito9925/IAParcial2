@@ -5,7 +5,6 @@ using UnityEngine;
 public class AgentModel : Model
 {
     private Transform _transform;
-    private Agent _entity;
 
     private Collider[] cols;
 
@@ -34,7 +33,7 @@ public class AgentModel : Model
         if (dir.magnitude < 0.25f)
         {
             _path.RemoveAt(0);
-            if(_path.Count <= 0)
+            if(_path.Count <= 0 && _entity._state == Agent.States.Patrol)
             {
                 _entity.firstPath = !_entity.firstPath;
                 _entity.StartPatrol();
@@ -44,8 +43,15 @@ public class AgentModel : Model
         _transform.position += dir.normalized * _speed * Time.deltaTime;
     }
 
+
     [SerializeField] private float _speed = 2;
     private List<Pf_Node> _path = new();
+
+
+    public override bool HasNodes()
+    {
+        return !(_path.Count <= 0);
+    }
 
     public override void SetPos(Vector3 pos)
     {
@@ -97,6 +103,8 @@ public class AgentModel : Model
 
         return seePlayer;
     }
+
+
 
     
 }

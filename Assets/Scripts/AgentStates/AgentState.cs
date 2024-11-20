@@ -5,6 +5,7 @@ using UnityEngine;
 public class AgentState : IState
 {
     protected StateMachine<AgentState> _fsm;
+    public Agent _entity;
 
     public virtual void Awake()
     {

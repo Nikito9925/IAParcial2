@@ -118,7 +118,7 @@ public class PathFinding
                     nodeToAdd = cameFrom[nodeToAdd]; //Obtengo el nodo anterior del actual
                 }
                 path.Reverse();
-                Debug.Log("Se chequearon " + cameFrom.Count);
+                //Debug.Log("Se chequearon " + cameFrom.Count);
                 return path;
             }
 
@@ -142,5 +142,30 @@ public class PathFinding
     private float Heuristic(Pf_Node objective, Pf_Node next)
     {
         return Mathf.Abs(objective._x - next._x) + Mathf.Abs(objective._y - next._y);
+    }
+
+    public Pf_Node GetClosestNode(Transform target, GameObject[] nodes)
+    {
+        List<Pf_Node> nodeList = new List<Pf_Node>();
+
+        foreach (GameObject node in nodes)
+        {
+            if(node != null)
+            {
+                Pf_Node newNode = node.GetComponent<Pf_Node>();
+                nodeList.Add(newNode);
+            }
+        }
+        Pf_Node closestNode = nodeList[0];
+
+        for (int i = 0; i < nodeList.Count; i++)
+        {
+            if (Vector3.Distance(nodeList[i].transform.position, target.position) < Vector3.Distance(closestNode.transform.position, target.position))
+            {
+                closestNode = nodeList[i];
+            }
+        }
+
+        return closestNode;
     }
 }

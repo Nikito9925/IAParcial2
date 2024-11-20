@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = default;
+    public Transform _player;
+    public Agent[] _agents;
 
     private PathFinding _pf = default;
 
@@ -26,10 +28,21 @@ public class GameManager : MonoBehaviour
 
     public void StartPatrol(Agent agent, Pf_Node startNode, Pf_Node goalNode)
     {
-        grid.ResetNodesColors();
+        //grid.ResetNodesColors();
         List<Pf_Node> path = _pf.ConstructAStar(startNode, goalNode);
         agent._controller._model.SetPath(path);
         //PaintPath(path);
+    }
+
+    public void StartChase(Agent agent, Transform agentPos, Transform playerPos)
+    {
+        Pf_Node newStart = _pf.GetClosestNode(agentPos, grid.nodes);
+        Pf_Node newGoal = _pf.GetClosestNode(playerPos, grid.nodes);
+
+        List<Pf_Node> path = _pf.ConstructAStar(newStart, newGoal);
+        agent._controller._model.SetPath(path);
+
+        Debug.Log("START CHASE");
     }
 
     /*
@@ -65,4 +78,17 @@ public class GameManager : MonoBehaviour
     {
         obj.GetComponent<Renderer>().material.color = color;
     }
+
+    public void AlertAgents()
+    {
+        foreach(Agent agent in _agents)
+        {
+            if(agent._state != Agent.States.Chase)
+            {
+                agent._controller._fsm.SetState<AgentStateChase>();
+            }
+        }
+    }
+
+
 }
